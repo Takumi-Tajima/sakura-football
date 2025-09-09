@@ -7,11 +7,9 @@ Rails.application.routes.draw do
     resources :lessons, only: %i[index show new edit create update destroy]
   end
 
-  namespace :users do
-    root 'home#index'
-  end
+  resources :lessons, only: %i[index show]
 
-  root 'users/home#index'
+  root 'lessons#index'
 
   get 'up' => 'rails/health#show', as: :rails_health_check
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?

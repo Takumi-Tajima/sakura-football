@@ -1,0 +1,13 @@
+%h1.fs-2.mb-4 #{@lesson.name} 詳細
+.row.justify-content-center
+  .col-8
+    %dl.row
+      .card.p-3
+        %dt.col-3 レッスン名
+        %dd.col-9.p-1= @lesson.name
+
+        %dt.col-3 レッスン詳細
+        %dd.col-9.p-1= @lesson.description
+
+        %dt.col-3 参加料金
+        %dd.col-9.p-1= number_to_currency(@lesson.participation_fee)

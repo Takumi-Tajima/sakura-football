@@ -6,5 +6,5 @@ class Lesson < ApplicationRecord
   validates :participation_fee, numericality: { only_integer: true, greater_than: 0 }
 
   scope :default_order, -> { order(:position) }
-  # scope :published, -> { where(is_published: true) }
+  scope :published, -> { where(is_published: true) }
 end
