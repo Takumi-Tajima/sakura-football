@@ -1,0 +1,11 @@
+.row.justify-content-center
+  .col-5
+    = simple_form_for([:users, @lesson, @booking]) do |f|
+      = f.input :lesson_id, as: :hidden, input_html: { value: @lesson.id }
+      = f.input :lesson_name, as: :hidden, input_html: { value: @lesson.name }
+      = f.input :lesson_at, as: :hidden, input_html: { value: Time.current }
+      = f.input :total_fee, as: :hidden, input_html: { value: 3000 }
+      = f.input :court_fee, as: :hidden, input_html: { value: 1200 }
+      = f.input :participation_fee, as: :hidden, input_html: { value: @lesson.participation_fee }
+      = f.input :participant_count
+      = f.button :submit, class: 'btn-primary'

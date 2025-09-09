@@ -11,3 +11,5 @@
 
         %dt.col-3 参加料金
         %dd.col-9.p-1= number_to_currency(@lesson.participation_fee)
+
+    .text-end= link_to '予約へ進む', new_users_lesson_booking_path(@lesson), class: 'btn btn-primary'

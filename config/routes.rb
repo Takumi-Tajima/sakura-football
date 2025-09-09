@@ -8,6 +8,12 @@ Rails.application.routes.draw do
     resources :users, only: %i[index show edit update destroy]
   end
 
+  namespace :users do
+    resources :lessons, only: [] do
+      resources :bookings, only: %i[index show new create destroy], module: :lessons
+    end
+  end
+
   resources :lessons, only: %i[index show]
 
   root 'lessons#index'

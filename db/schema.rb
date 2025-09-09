@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_09_09_084416) do
+ActiveRecord::Schema[8.0].define(version: 2025_09_09_085522) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -26,6 +26,21 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_09_084416) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_administrators_on_email", unique: true
+  end
+
+  create_table "bookings", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "lesson_id", null: false
+    t.integer "participant_count", null: false
+    t.integer "participation_fee", null: false
+    t.integer "court_fee", null: false
+    t.integer "total_fee", null: false
+    t.string "lesson_name", null: false
+    t.datetime "lesson_at", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["lesson_id"], name: "index_bookings_on_lesson_id"
+    t.index ["user_id"], name: "index_bookings_on_user_id"
   end
 
   create_table "lessons", force: :cascade do |t|
@@ -60,4 +75,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_09_084416) do
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
   end
+
+  add_foreign_key "bookings", "lessons"
+  add_foreign_key "bookings", "users"
 end
