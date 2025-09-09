@@ -1,0 +1,22 @@
+%h1.fs-2.mb-4= @user.name
+.row.justify-content-center
+  .col-8
+    %dl.row
+      %dt.col-3 ユーザー名
+      %dd.col-9= @user.name
+
+      %dt.col-3 メールアドレス
+      %dd.col-9= @user.email
+
+      %dt.col-3 登録日
+      %dd.col-9= l(@user.created_at)
+
+      -# %dt.col-3 住所
+      -# %dd.col-9= l(@user.address)
+
+      %dt.col-3 最終ログイン
+      %dd.col-9= @user.last_sign_in_at ? l(@user.last_sign_in_at) : ''
+
+    .mt-5.d-flex.justify-content-between
+      = link_to '編集', edit_administrators_user_path(@user), class: 'btn btn-outline-primary'
+      = button_to '削除', administrators_users_path(@user), method: :delete, data: { turbo_confirm: '本当に削除しますか？' }, class: 'btn btn-outline-danger'

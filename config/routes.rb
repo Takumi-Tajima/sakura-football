@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   namespace :administrators do
     root 'lessons#index'
     resources :lessons, only: %i[index show new edit create update destroy]
+    resources :users, only: %i[index show edit update destroy]
   end
 
   resources :lessons, only: %i[index show]

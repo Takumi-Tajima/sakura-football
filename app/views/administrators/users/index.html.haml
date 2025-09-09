@@ -1,0 +1,17 @@
+%h1.fs-2.mb-4 ユーザー一覧
+.row.justify-content-center
+  .col-8
+    %table.table
+      %thead
+        %tr
+          %th 名前
+          %th メールアドレス
+          %th 登録日
+          %th 最終ログイン
+      %tbody
+        - @users.each do |user|
+          %tr
+            %td= link_to user.name, administrators_user_path(user)
+            %td= user.email
+            %td= l(user.created_at)
+            %td= user.last_sign_in_at ? l(user.last_sign_in_at) : ''
