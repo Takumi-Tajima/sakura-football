@@ -11,8 +11,8 @@
       %dt.col-3 登録日
       %dd.col-9= l(@user.created_at)
 
-      -# %dt.col-3 住所
-      -# %dd.col-9= l(@user.address)
+      %dt.col-3 住所
+      %dd.col-9= @user.address
 
       %dt.col-3 最終ログイン
       %dd.col-9= @user.last_sign_in_at ? l(@user.last_sign_in_at) : ''

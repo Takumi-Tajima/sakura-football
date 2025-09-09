@@ -9,6 +9,7 @@ ja:
         remember_me: ログインを記憶する
       user:
         name: 名前
+        address: 住所
       lesson:
         name: レッスン名
         description: レッスンの内容
