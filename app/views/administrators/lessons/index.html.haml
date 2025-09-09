@@ -5,12 +5,14 @@
     %table.table
       %thead
         %tr
+          %th 表示順
           %th レッスン名
           %th 参加料金
           %th 公開状況
       %tbody
         - @lessons.each do |lesson|
           %tr
+            %td= lesson.position
             %td= link_to lesson.name, administrators_lesson_path(lesson)
             %td= number_to_currency(lesson.participation_fee)
             %td= lesson.is_published? ? '公開中' : '非公開'

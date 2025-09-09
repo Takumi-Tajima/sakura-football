@@ -12,3 +12,4 @@ ja:
         description: レッスンの内容
         participation_fee: 参加費（1人あたり）
         is_published: 公開状況
+        position: 表示順

@@ -2,6 +2,9 @@
 .row.justify-content-center
   .col-8
     %dl.row
+      %dt.col-3 表示順
+      %dd.col-9= @lesson.position
+
       %dt.col-3 レッスン名
       %dd.col-9= @lesson.name
 

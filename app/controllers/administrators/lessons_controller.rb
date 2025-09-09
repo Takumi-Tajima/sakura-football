@@ -45,6 +45,6 @@ class Administrators::LessonsController < Administrators::ApplicationController
   end
 
   def lesson_params
-    params.expect(lesson: %i[name description participation_fee is_published])
+    params.expect(lesson: %i[name description participation_fee is_published position])
   end
 end
