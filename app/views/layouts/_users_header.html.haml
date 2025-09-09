@@ -9,3 +9,5 @@
         %li.nav-item.d-flex.align-items-center
           .me-3= link_to current_user.email, edit_user_registration_path, class: 'text-white'
           = button_to 'ログアウト', destroy_user_session_path, method: :delete, data: { turbo_confirm: 'ログアウトしますか？' }, class: 'btn btn-outline-light'
+      - else
+        %li.nav-item= link_to 'ログイン', new_user_session_path, class: 'btn btn-primary'
