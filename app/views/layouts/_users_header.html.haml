@@ -1,3 +1,11 @@
 .navbar.bg-danger.bg-gradient
   .container-fluid
-    .navbar-brand= link_to 'SakuraFootball'
+    .d-flex.align-items-center
+      .navbar-brand= link_to 'SakuraFootball', root_path, class: 'text-decoration-none text-white'
+    %ul.navbar-nav.flex-row.gap-3
+      %li.nav-item= link_to 'レッスン一覧', root_path, class: 'nav-link text-white'
+    %ul.navbar-nav.ms-auto
+      - if user_signed_in?
+        %li.nav-item.d-flex.align-items-center
+          .me-3= link_to current_user.email, edit_user_registration_path, class: 'text-white'
+          = button_to 'ログアウト', destroy_user_session_path, method: :delete, data: { turbo_confirm: 'ログアウトしますか？' }, class: 'btn btn-outline-light'

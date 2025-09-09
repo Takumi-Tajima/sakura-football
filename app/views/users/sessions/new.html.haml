@@ -1,0 +1,6 @@
+%h1.fs-2.mb-4 ログイン
+= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+  = f.input :email, autofocus: true
+  = f.input :password
+  = f.button :submit, 'ログイン', class: 'btn-primary'
+= render 'users/shared/links'
