@@ -2,5 +2,7 @@
   .container-fluid
     .navbar-brand= link_to 'SakuraFootball[管理者]', administrators_root_path, class: 'text-decoration-none text-dark'
     - if administrator_signed_in?
+      %ul.navbar-nav.flex-row.gap-3
+        %li.nav-item= link_to 'レッスン一覧', administrators_lessons_path, class: 'nav-link'
       .ms-auto
         = button_to 'ログアウト', destroy_administrator_session_path, method: :delete, data: { turbo_confirm: 'ログアウトしますか？' }, class: 'btn btn-outline-danger'

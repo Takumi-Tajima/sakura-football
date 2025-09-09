@@ -7,3 +7,8 @@ ja:
         email: メールアドレス
         password: パスワード
         remember_me: ログインを記憶する
+      lesson:
+        name: レッスン名
+        description: レッスンの内容
+        participation_fee: 参加費（1人あたり）
+        is_published: 公開状況

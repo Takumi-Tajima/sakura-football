@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get 'up' => 'rails/health#show', as: :rails_health_check
 
   namespace :administrators do
-    root 'home#index'
+    root 'lessons#index'
+    resources :lessons, only: %i[index show new edit create update destroy]
   end
 end

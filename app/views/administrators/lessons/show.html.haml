@@ -1,0 +1,23 @@
+%h1.fs-2.mb-4= @lesson.name
+.row.justify-content-center
+  .col-8
+    %dl.row
+      %dt.col-3 レッスン名
+      %dd.col-9= @lesson.name
+
+      %dt.col-3 レッスン内容
+      %dd.col-9= @lesson.description
+
+      %dt.col-3 参加料金(1人あたり)
+      %dd.col-9= number_to_currency(@lesson.participation_fee)
+
+      %dt.col-3 公開状況
+      %dd.col-9
+        - if @lesson.is_published?
+          %span.text-success 公開中
+        - else
+          %span.text-danger 非公開
+
+    .mt-5.d-flex.justify-content-between
+      = link_to '編集', edit_administrators_lesson_path(@lesson), class: 'btn btn-primary'
+      = button_to '削除', administrators_lesson_path(@lesson), method: :delete, data: { turbo_confirm: '本当に削除しますか？' }, class: 'btn btn-outline-danger'

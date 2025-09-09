@@ -1,0 +1,6 @@
+= simple_form_for([:administrators, lesson]) do |f|
+  = f.input :name
+  = f.input :description
+  = f.input :participation_fee
+  = f.input :is_published
+  = f.button :submit, class: 'btn-primary'
