@@ -1,6 +1,8 @@
 class Lesson < ApplicationRecord
   acts_as_list
 
+  has_many :bookings, dependent: :destroy
+
   validates :name, presence: true
   validates :description, presence: true
   validates :participation_fee, numericality: { only_integer: true, greater_than: 0 }
