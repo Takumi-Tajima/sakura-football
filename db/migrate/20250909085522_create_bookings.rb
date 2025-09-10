@@ -8,7 +8,8 @@ class CreateBookings < ActiveRecord::Migration[8.0]
       t.integer :court_fee, null: false
       t.integer :total_fee, null: false
       t.string :lesson_name, null: false
-      t.datetime :lesson_at, null: false
+      t.datetime :lesson_start_at, null: false
+      t.datetime :lesson_end_at, null: false
 
       t.timestamps
     end

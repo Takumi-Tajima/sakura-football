@@ -37,7 +37,6 @@ class Users::Lessons::BookingsController < Users::ApplicationController
   end
 
   def booking_params
-    # TODO: 必要性低減の要素に留める
-    params.expect(booking: %i[participant_count participation_fee court_fee total_fee lesson_name lesson_at lesson_id])
+    params.expect(booking: %i[lesson_id participant_count lesson_date lesson_time_slot])
   end
 end

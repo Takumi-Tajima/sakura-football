@@ -36,7 +36,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_09_085522) do
     t.integer "court_fee", null: false
     t.integer "total_fee", null: false
     t.string "lesson_name", null: false
-    t.datetime "lesson_at", null: false
+    t.datetime "lesson_start_at", null: false
+    t.datetime "lesson_end_at", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["lesson_id"], name: "index_bookings_on_lesson_id"
