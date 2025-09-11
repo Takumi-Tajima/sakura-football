@@ -1,6 +1,6 @@
-%h1.fs-2.mb-4= @booking.lesson.name
 .row.justify-content-center
   .col-8
+    %h1.fs-2.mb-4= @booking.lesson.name
     %dl.row
       .card.p-3
         %dt.col-3 レッスン名
@@ -26,3 +26,8 @@
 
         %dt.col-3 合計金額
         %dd.col-9.p-1= number_to_currency(@booking.total_fee)
+
+    .text-end.mt-3= button_to '予約をキャンセルする',
+                              users_lesson_booking_path(@booking.lesson, @booking),
+                              method: :delete, data: { turbo_confirm: '本当に予約をキャンセルしますか？' },
+                              class: 'btn btn-outline-danger'

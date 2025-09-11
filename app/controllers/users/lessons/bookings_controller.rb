@@ -1,5 +1,5 @@
 class Users::Lessons::BookingsController < Users::ApplicationController
-  before_action :set_lesson, only: %i[new create destroy]
+  before_action :set_lesson, only: %i[new create]
   before_action :set_booking, only: %i[destroy]
 
   def new
@@ -18,6 +18,8 @@ class Users::Lessons::BookingsController < Users::ApplicationController
   end
 
   def destroy
+    @booking.destroy!
+    redirect_to users_bookings_path, notice: '予約をキャンセルしました。', status: :see_other
   end
 
   private

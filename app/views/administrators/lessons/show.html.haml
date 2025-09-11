@@ -1,6 +1,6 @@
-%h1.fs-2.mb-4= @lesson.name
 .row.justify-content-center
   .col-8
+    %h1.fs-2.mb-4= @lesson.name
     %dl.row
       %dt.col-3 表示順
       %dd.col-9= @lesson.position
@@ -23,4 +23,7 @@
 
     .mt-5.d-flex.justify-content-between
       = link_to '編集', edit_administrators_lesson_path(@lesson), class: 'btn btn-primary'
-      = button_to '削除', administrators_lesson_path(@lesson), method: :delete, data: { turbo_confirm: '本当に削除しますか？' }, class: 'btn btn-outline-danger'
+      = button_to '削除',
+                  administrators_lesson_path(@lesson),
+                  method: :delete, data: { turbo_confirm: '本当に削除しますか？' },
+                  class: 'btn btn-outline-danger'
