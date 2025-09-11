@@ -13,12 +13,12 @@ class Booking < ApplicationRecord
   validates :lesson_name, presence: true
   validates :lesson_start_at, presence: true
   validates :lesson_end_at, presence: true
-  validates :total_fee, numericality: { only_integer: true, greater_than: 0 }
-  validates :court_fee, numericality: { only_integer: true, greater_than: 0 }
-  validates :participation_fee, numericality: { only_integer: true, greater_than: 0 }
+  validates :participation_fee, presence: true
   validates :participant_count, numericality: { only_integer: true, greater_than: 0 }
+  validates :court_fee, presence: true
+  validates :total_fee, presence: true
 
-  before_validation :set_booking_attributes
+  before_validation :set_booking_attributes, on: :create, if: :has_required_inputs?
 
   scope :default_order, -> { order(:lesson_start_at) }
 
@@ -31,31 +31,34 @@ class Booking < ApplicationRecord
 
   private
 
+  def has_required_inputs?
+    participant_count.present? && lesson_date.present? && lesson_time_slot.present?
+  end
+
   def set_booking_attributes
     self.lesson_name = lesson.name
     self.participation_fee = lesson.participation_fee
     self.court_fee = calculate_court_fee
-    self.total_fee = calculate_total_fee
-
-    calculate_and_set_lesson_start_at_and_end_at
+    self.total_fee = calculate_total_fee # MEMO: court_feeの値に依存
+    self.lesson_start_at, self.lesson_end_at = calculate_lesson_start_at_and_end_at
   end
 
   def calculate_court_fee
-    return if participant_count.nil?
-
     group_count = ((participant_count - 1) / PARTICIPANTS_PER_GROUP) + 1
     group_count * COURT_FEE_PER_GROUP
   end
 
   def calculate_total_fee
-    self.total_fee = court_fee + (participation_fee * participant_count)
+    court_fee + (participation_fee * participant_count)
   end
 
-  def calculate_and_set_lesson_start_at_and_end_at
+  def calculate_lesson_start_at_and_end_at
     date = Date.parse(lesson_date)
     start_hour, end_hour = lesson_time_slot.split('-').map(&:to_i)
 
-    self.lesson_start_at = date + start_hour.hours
-    self.lesson_end_at = date + end_hour.hours
+    start_at = date + start_hour.hours
+    end_at = date + end_hour.hours
+
+    [start_at, end_at]
   end
 end

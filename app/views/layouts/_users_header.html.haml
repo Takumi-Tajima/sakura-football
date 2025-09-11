@@ -4,6 +4,8 @@
       .navbar-brand= link_to 'SakuraFootball', root_path, class: 'text-decoration-none text-white'
     %ul.navbar-nav.flex-row.gap-3
       %li.nav-item= link_to 'レッスン一覧', root_path, class: 'nav-link text-white'
+      - if user_signed_in?
+        %li.nav-item= link_to '予約一覧', users_bookings_path, class: 'nav-link text-white'
     %ul.navbar-nav.ms-auto
       - if user_signed_in?
         %li.nav-item.d-flex.align-items-center

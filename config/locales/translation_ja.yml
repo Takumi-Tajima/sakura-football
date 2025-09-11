@@ -26,3 +26,5 @@ ja:
         lesson_name: レッスン名
         booked_at: 予約日時
         status: ステータス
+        lesson_date: レッスン日
+        lesson_time_slot: レッスン時間
