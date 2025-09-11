@@ -9,9 +9,9 @@ Rails.application.routes.draw do
   end
 
   namespace :users do
-    # MEMO: これネストさせてるから、予約しているレッスン一覧やるときは、新しくリソース切ってあげる必要があるね。どっちの方がいいんだろうか？
+    resources :bookings, only: %i[index show]
     resources :lessons, only: [] do
-      resources :bookings, only: %i[index show new create destroy], module: :lessons
+      resources :bookings, only: %i[new create destroy], module: :lessons
     end
   end
 

@@ -1,0 +1,28 @@
+%h1.fs-2.mb-4= @booking.lesson.name
+.row.justify-content-center
+  .col-8
+    %dl.row
+      .card.p-3
+        %dt.col-3 レッスン名
+        %dd.col-9.p-1= @booking.lesson.name
+
+        %dt.col-3 レッスン詳細
+        %dd.col-9.p-1= @booking.lesson.description
+
+        %dt.col-3 開始時間
+        %dd.col-9.p-1= l(@booking.lesson_start_at)
+
+        %dt.col-3 終了時間
+        %dd.col-9.p-1= l(@booking.lesson_end_at)
+
+        %dt.col-3 参加人数
+        %dd.col-9.p-1= @booking.participant_count
+
+        %dt.col-3 参加料金(1人あたり)
+        %dd.col-9.p-1= number_to_currency(@booking.participation_fee)
+
+        %dt.col-3 コート利用料金
+        %dd.col-9.p-1= number_to_currency(@booking.court_fee)
+
+        %dt.col-3 合計金額
+        %dd.col-9.p-1= number_to_currency(@booking.total_fee)
