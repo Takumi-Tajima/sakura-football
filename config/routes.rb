@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     root 'lessons#index'
     resources :lessons, only: %i[index show new edit create update destroy]
     resources :users, only: %i[index show edit update destroy]
+    resources :bookings, only: %i[index]
   end
 
   namespace :users do
