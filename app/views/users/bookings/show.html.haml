@@ -1,11 +1,8 @@
 .row.justify-content-center
   .col-8
-    %h1.fs-2.mb-4= @booking.lesson.name
+    %h1.fs-2.mb-4= @booking.lesson_name
     %dl.row
       .card.p-3
-        %dt.col-3 レッスン名
-        %dd.col-9.p-1= @booking.lesson.name
-
         %dt.col-3 レッスン詳細
         %dd.col-9.p-1= @booking.lesson.description
 

@@ -21,6 +21,8 @@ class Booking < ApplicationRecord
   before_validation :set_booking_attributes, on: :create, if: :has_required_inputs?
 
   scope :default_order, -> { order(:lesson_start_at) }
+  scope :history, -> { where('lesson_end_at < ?', Time.current) }
+  scope :upcoming, -> { where('lesson_end_at >= ?', Time.current) }
 
   def self.available_dates
     (MIN_BUSINESS_DAYS..MAX_BUSINESS_DAYS).filter_map do |days|

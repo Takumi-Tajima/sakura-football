@@ -1,0 +1,19 @@
+.row.justify-content-center
+  .col-9
+    %h1.fs-2.mb-4 予約履歴
+    %table.table
+      %thead
+        %tr
+          %th レッスン名
+          %th 人数
+          %th 開始時間
+          %th 終了時間
+          %th 合計金額
+      %tbody
+        - @booking_histories.each do |booking_history|
+          %tr
+            %td= link_to booking_history.lesson_name, users_booking_history_path(booking_history)
+            %td= booking_history.participant_count
+            %td= l(booking_history.lesson_start_at)
+            %td= l(booking_history.lesson_end_at)
+            %td= number_to_currency(booking_history.total_fee)

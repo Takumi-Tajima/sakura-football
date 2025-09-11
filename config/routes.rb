@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
   namespace :users do
     resources :bookings, only: %i[index show]
+    resources :booking_histories, only: %i[index show]
     resources :lessons, only: [] do
       resources :bookings, only: %i[new create destroy], module: :lessons
     end

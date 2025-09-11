@@ -12,7 +12,7 @@
       %tbody
         - @bookings.each do |booking|
           %tr
-            %td= link_to booking.lesson.name, users_booking_path(booking)
+            %td= link_to booking.lesson_name, users_booking_path(booking)
             %td= l(booking.lesson_start_at)
             %td= l(booking.lesson_end_at)
             %td= booking.participant_count
