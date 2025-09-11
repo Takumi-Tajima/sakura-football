@@ -18,7 +18,10 @@ class Booking < ApplicationRecord
   validates :court_fee, presence: true
   validates :total_fee, presence: true
 
-  before_validation :set_booking_attributes, on: :create, if: :has_required_inputs?
+  before_validation :validate_participant_count_presence
+  before_validation :validate_lesson_date_within_available_dates
+  before_validation :validate_lesson_time_slot_within_available_time_slots
+  before_validation :set_booking_attributes, on: :create
 
   scope :default_order, -> { order(:lesson_start_at) }
   scope :history, -> { where('lesson_end_at < ?', Time.current) }
@@ -33,8 +36,25 @@ class Booking < ApplicationRecord
 
   private
 
-  def has_required_inputs?
-    participant_count.present? && lesson_date.present? && lesson_time_slot.present?
+  def validate_participant_count_presence
+    if participant_count.nil?
+      errors.add(:participant_count, 'を入力してください。')
+      throw(:abort)
+    end
+  end
+
+  def validate_lesson_date_within_available_dates
+    if Booking.available_dates.exclude?(lesson_date.to_date)
+      errors.add(:lesson_date, 'は平日の3営業日から14営業日までを選択してください。')
+      throw(:abort)
+    end
+  end
+
+  def validate_lesson_time_slot_within_available_time_slots
+    if LESSON_TIME_SLOTS.exclude?(lesson_time_slot)
+      errors.add(:lesson_time_slot, 'は有効な時間帯を選択してください。')
+      throw(:abort)
+    end
   end
 
   def set_booking_attributes

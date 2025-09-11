@@ -1,0 +1,7 @@
+.row.justify-content-center
+  .col-5
+    = simple_form_for([:users, @lesson, @booking]) do |f|
+      = f.input :participant_count
+      = f.input :lesson_date, as: :select, collection: Booking.available_dates
+      = f.input :lesson_time_slot, as: :select, collection: Booking::LESSON_TIME_SLOTS
+      = f.button :submit, class: 'btn-primary'
