@@ -39,7 +39,7 @@ class Booking < ApplicationRecord
     self.lesson_name = lesson.name
     self.participation_fee = lesson.participation_fee
     self.court_fee = calculate_court_fee
-    self.total_fee = calculate_total_fee # MEMO: court_feeの値に依存
+    self.total_fee = calculate_total_fee # NOTE: court_feeの値に依存
     self.lesson_start_at, self.lesson_end_at = calculate_lesson_start_at_and_end_at
   end
 
