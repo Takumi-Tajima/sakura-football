@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   namespace :users do
     resources :bookings, only: %i[index show]
     resources :booking_histories, only: %i[index show]
+    resources :user_lesson_attendance_rankings, only: %i[index]
     resources :lessons, only: [] do
       resources :bookings, only: %i[new create destroy], module: :lessons
     end

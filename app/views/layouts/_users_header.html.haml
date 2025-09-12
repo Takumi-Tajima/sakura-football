@@ -7,6 +7,7 @@
       - if user_signed_in?
         %li.nav-item= link_to '予約一覧', users_bookings_path, class: 'nav-link text-white'
         %li.nav-item= link_to '予約履歴', users_booking_histories_path, class: 'nav-link text-white'
+        %li.nav-item= link_to '月間ランキング', users_user_lesson_attendance_rankings_path, class: 'nav-link text-white'
     %ul.navbar-nav.ms-auto
       - if user_signed_in?
         %li.nav-item.d-flex.align-items-center

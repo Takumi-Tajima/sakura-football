@@ -26,6 +26,14 @@ class Booking < ApplicationRecord
   scope :default_order, -> { order(:lesson_start_at) }
   scope :history, -> { where('lesson_end_at < ?', Time.current) }
   scope :upcoming, -> { where('lesson_end_at >= ?', Time.current) }
+  scope :user_lesson_attendance_rankings, -> {
+    current_month = Time.current
+    joins(:user)
+      .where(lesson_end_at: current_month.all_month)
+      .group('users.id', 'users.name')
+      .select('users.id, users.name, COUNT(bookings.id) as lesson_attendance_count')
+      .order('lesson_attendance_count DESC, users.id ASC')
+  }
 
   def self.available_dates
     (MIN_BUSINESS_DAYS..MAX_BUSINESS_DAYS).filter_map do |days|

@@ -1,0 +1,15 @@
+.row.justify-content-center
+  .col-8
+    %h1.fs-2.mb-4 #{l(Time.current, format: :month)} 月: レッスン参加数ランキング
+    %table.table
+      %thead
+        %tr
+          %th 順位
+          %th ユーザー名
+          %th レッスン参加回数
+      %tbody
+        - @users.each_with_index do |user, index|
+          %tr
+            %td= index + 1
+            %td= user.name
+            %td= user.lesson_attendance_count

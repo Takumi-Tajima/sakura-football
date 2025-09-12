@@ -184,4 +184,5 @@ ja:
     formats:
       default: "%m/%d %H:%M"
       long: "%Y/%m/%d %H:%M"
+      month: "%m"
     pm: 午後
