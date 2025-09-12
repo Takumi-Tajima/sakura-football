@@ -8,8 +8,8 @@
           %th ユーザー名
           %th レッスン参加回数
       %tbody
-        - @users.each_with_index do |user, index|
+        - @users.each do |user|
           %tr
-            %td= index + 1
+            %th= user.ranking
             %td= user.name
             %td= user.lesson_attendance_count

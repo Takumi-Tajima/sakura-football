@@ -31,8 +31,13 @@ class Booking < ApplicationRecord
     joins(:user)
       .where(lesson_end_at: current_month.all_month)
       .group('users.id', 'users.name')
-      .select('users.id, users.name, COUNT(bookings.id) as lesson_attendance_count')
-      .order('lesson_attendance_count DESC, users.id ASC')
+      .select(
+        'users.id',
+        'users.name',
+        'COUNT(bookings.id) as lesson_attendance_count',
+        'DENSE_RANK() OVER (ORDER BY COUNT(bookings.id) DESC) as ranking'
+      )
+      .order('ranking ASC, users.id ASC')
   }
 
   def self.available_dates
