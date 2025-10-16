@@ -5,6 +5,17 @@ class Booking < ApplicationRecord
   MIN_BUSINESS_DAYS = 3
   MAX_BUSINESS_DAYS = 14
 
+  # こういう感じにしたほうがわかりやすいかも
+  # LESSON_TIME_SLOTS = {
+  #   '09-11' => { start_hour: 9, end_hour: 11 },
+  #   '11-13' => { start_hour: 11, end_hour: 13 },
+  #   '13-15' => { start_hour: 13, end_hour: 15 },
+  #   '15-17' => { start_hour: 15, end_hour: 17 },
+  #   '17-19' => { start_hour: 17, end_hour: 19 },
+  #   '19-21' => { start_hour: 19, end_hour: 21 }
+  # }
+  # LESSON_TIME_SLOTS.keys で選択肢を取得できる
+
   belongs_to :user
   belongs_to :lesson
 
@@ -21,6 +32,7 @@ class Booking < ApplicationRecord
   before_validation :validate_participant_count_presence
   before_validation :validate_lesson_date_within_available_dates
   before_validation :validate_lesson_time_slot_within_available_time_slots
+  # before validationで値をセットしているのであれば、その後のpresenceとかは普通のvalidationで良いのでは
   before_validation :set_booking_attributes, on: :create
 
   scope :default_order, -> { order(:lesson_start_at) }
@@ -64,6 +76,7 @@ class Booking < ApplicationRecord
   end
 
   def validate_lesson_time_slot_within_available_time_slots
+    # 対象のデータが指定されたものに含まれてるかは標準の機能でできたりしないかな？
     if LESSON_TIME_SLOTS.exclude?(lesson_time_slot)
       errors.add(:lesson_time_slot, 'は有効な時間帯を選択してください。')
       throw(:abort)
@@ -88,6 +101,8 @@ class Booking < ApplicationRecord
   end
 
   def calculate_lesson_start_at_and_end_at
+    return [nil, nil] if lesson_date.blank? || lesson_time_slot.blank?
+
     date = Date.parse(lesson_date)
     start_hour, end_hour = lesson_time_slot.split('-').map(&:to_i)
 
