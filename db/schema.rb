@@ -46,6 +46,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_09_085522) do
 
   create_table "lessons", force: :cascade do |t|
     t.string "name", null: false
+    # 改行反映されてなさそうだった
     t.text "description", null: false
     t.integer "participation_fee", null: false
     t.boolean "is_published", default: false, null: false
